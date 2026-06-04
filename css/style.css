@@ -17,7 +17,7 @@ body {
   font-family: sans-serif;
   background-color: rgb(99, 132, 100);
   color: rgb(99, 132, 100);
-  min-height: 2000px;
+  min-height: 1700px;
 }
 html,
 body {
@@ -196,67 +196,54 @@ body {
   transition: all 0.2s ease;
 }
 
-@media (max-width: 1366px) {
-  html {
-    font-size: 75%;
-  }
-}
-@media (max-width: 768px) {
-  .kontak-kapsul-container {
-    /* 1. KEMBALIKAN POSISI: Mengubah dari fixed/sticky menjadi posisi normal di HP */
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    transform: none !important;
-
-    /* 2. ATUR UKURAN LAYAR HP: Memaksa bentuk kotak vertikal ke bawah */
-    display: flex !important;
-    flex-direction: column !important;
-    width: 90% !important; /* Lebar kotak mengambil 90% lebar layar HP */
-    max-width: 100% !important;
-
-    /* 3. RAPIDKAN SISI VISUAL */
-    padding: 20px 15px !important;
-    border-radius: 2rem !important; /* Kelengkungan sudut dikecilkan agar proporsional di HP */
-    gap: 15px !important; /* Jarak vertikal antar baris kontak */
-
-    /* 4. ATUR MARGIN AMAN */
-    margin: 40px auto 160px !important; /* Bawah diberi 160px agar tidak tertumpuk tombol CONTACT US fixed */
-  }
-
-  /* Mengatur item kontak di dalam HP agar rata kiri */
-  .contact-sidebar-item {
-    width: 100% !important;
-    justify-content: flex-start !important; /* Ikon dan teks mepet ke kiri */
-    padding-left: 5px !important;
-  }
-
-  /* Mengecilkan sedikit ukuran font agar muat di layar HP yang sempit */
-  .contact-sidebar-item .contact-text {
-    font-size: 0.95rem !important; /* Font diturunkan sedikit agar tidak melar */
-    white-space: normal !important; /* Mengizinkan teks email yang panjang untuk bungkus otomatis jika terlalu sempit */
-    word-break: break-all;
-  }
-
-  .contact-sidebar-item svg {
-    width: 18px !important; /* Perkecil sedikit ukuran ikon feather di HP */
-    height: 18px !important;
-  }
-}
-/* Jika layar browser berukuran 1024px atau lebih kecil (Layar Laptop kecil/Tablet) */
+/* ========================================================== */
+/* LAYOUT UNTUK LAPTOP KECIL / TABLET (MAX-WIDTH: 1024px)     */
+/* ========================================================== */
 @media (max-width: 1024px) {
   .kontak-kapsul-container {
-    flex-direction: column; /* Ubah dari menyamping menjadi tumpuk ke bawah */
-    border-radius: 2rem; /* Sesuaikan kelengkungan sudutnya */
-    width: 85%;
-    gap: 15px;
-    padding: 20px;
-    margin-bottom: 160px; /* Beri space lebih tinggi karena kotak memanjang ke bawah */
+    display: flex !important;
+    flex-direction: row !important; /* Biarkan tetap menyamping, jangan dipaksa ke bawah dulu */
+    justify-content: space-evenly !important; /* Membagi ruang antar-kontak secara adil */
+    align-items: center !important;
+
+    /* Lebarkan kontainernya agar teks email tidak tercekik */
+    width: 95% !important;
+    max-width: 100% !important;
+    padding: 15px 20px !important;
+    gap: 15px !important;
+
+    margin: 30px auto 150px !important; /* Tetap berada di tengah halaman */
+  }
+
+  .contact-sidebar-item .contact-text {
+    /* Perkecil ukuran font sedikit lagi agar muat dalam satu baris */
+    font-size: 0.85rem !important;
+    white-space: nowrap !important; /* Paksa teks email tetap lurus satu baris */
+  }
+}
+
+/* ========================================================== */
+/* LAYOUT KHUSUS UNTUK HP / MOBILE (MAX-WIDTH: 768px)         */
+/* ========================================================== */
+@media (max-width: 768px) {
+  .kontak-kapsul-container {
+    /* Di layar HP baru kita ubah susunannya bertumpuk ke bawah (vertikal) */
+    flex-direction: column !important;
+    width: 90% !important;
+    padding: 20px !important;
+    gap: 15px !important;
+    border-radius: 2rem !important;
+    margin: 30px auto 160px !important;
   }
 
   .contact-sidebar-item {
-    width: 100%;
-    justify-content: flex-start; /* Rata kiri agar rapi saat berbaris ke bawah */
-    padding-left: 10%; /* Dorong sedikit ke tengah */
+    width: 100% !important;
+    justify-content: flex-start !important; /* Rata kiri agar rapi saat berbaris ke bawah */
+    padding-left: 15% !important; /* Dorong sedikit ke tengah agar posisinya manis */
+  }
+
+  .contact-sidebar-item .contact-text {
+    font-size: 0.95rem !important; /* Di HP font bisa diperbesar lagi karena jalurnya sudah vertikal */
+    white-space: nowrap !important; /* Jaga tetap lurus ke samping */
   }
 }
