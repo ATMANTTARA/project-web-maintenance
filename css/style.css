@@ -1,0 +1,196 @@
+:root {
+  --primary: #12603b;
+  --bg: #476a5f;
+}
+
+* {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: rgb(99, 132, 100);
+  color: rgb(99, 132, 100);
+  min-height: 1700px;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: end;
+  background-image: url("../img/header-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.hero::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent 65%,
+    /* Atas sampai tengah (20%): Bening polos */ rgba(99, 132, 100, 0.5) 75%,
+    /* Tengah ke bawah (60%): Hijau mulai tipis */ rgba(99, 132, 100, 1) 100%
+      /* Paling bawah (100%): Hijau pekat solid */
+  );
+}
+
+.hero .content {
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
+  z-index: 9999;
+}
+.hero .content .cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 10px;
+  padding: 1rem 2rem;
+  font-size: 1.4rem;
+  font-family: "Cinzel", sans-serif;
+  font-weight: 600;
+  font-size: 2rem;
+  color: rgb(99, 132, 100);
+  background-color: #162c56;
+  border-radius: 5rem;
+  box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
+  position: fixed; /* KUNCI 1: Membuat tombol mengambang bebas dari scroll halaman */
+  bottom: 40px; /* Mengatur jarak tombol dari ujung bawah layar */
+  left: 50%; /* Geser pembungkus ke tengah horizontal (poros kiri di tengah) */
+  transform: translateX(
+    -50%
+  ); /* KUNCI 2: Menarik kembali box agar presisi pas di tengah-tengah layar */
+
+  width: auto; /* Memastikan lebar pembungkus mengikuti tombol */
+  z-index: 9999; /* KUNCI 3: Angka tinggi agar tombol selalu berada di lapisan paling atas menindih elemen lain */
+}
+.hero .content:hover .cta,
+.content:hover {
+  color: #ffffff;
+  stroke: #ffffff; /* Berubah menjadi putih menyala saat di-hover */
+  transition: all 0.2s ease;
+}
+
+.about {
+  padding: 10rem 7% 1.4rem;
+}
+
+.about h2 {
+  text-align: center;
+  font-size: 2.6rem;
+  margin-bottom: 3rem;
+  color: #162c56;
+  font-family: "Cinzel", sans-serif;
+  font-weight: 800;
+  border-bottom: 2px solid #162c56;
+  width: auto;
+}
+
+.about .row {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 7%;
+  align-items: center;
+  background-size: 2rem;
+  background-color: rgb(99, 132, 100);
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-left: 20px; /* Memberikan sedikit jarak dari dinding pojok kiri screen */
+  gap: 30px;
+  color: #162c56;
+  margin-top: -20px;
+}
+
+.about-main-img {
+  display: block; /* Membuat gambar menjadi block agar bisa diatur marginnya */
+  margin: 0 auto; /* Menjaga posisi gambar tetap presisi di tengah secara horizontal */
+
+  /* ========================================================== */
+  /* KUNCI UTAMA: Menaikkan gambar mendekati border atas */
+  /* ========================================================== */
+  margin-top: -90px; /* Sesuaikan angka ini (misal -40px, -80px) hingga mepet rapi */
+
+  /* Tambahan aman agar gambar tidak merusak layout */
+  max-width: 100%;
+  height: auto;
+}
+.about .kontek {
+  display: flex;
+  flex-direction: row; /* Menyusun item bersandingan ke samping */
+  justify-content: center; /* Mengumpulkan item di tengah-tengah kapsul */
+  align-items: center; /* Rata tengah secara vertikal (atas-bawah) */
+  gap: 30px; /* Jarak spasi horizontal antar akun kontak */
+
+  background-color: #162c56; /* Warna biru gelap sesuai tema kamu */
+  padding: 15px 35px; /* Ruang napas di dalam kapsul (atas-bawah 15px, kiri-kanan 35px) */
+  border-radius: 5rem; /* Membuat bentuk oval kapsul yang sempurna */
+
+  /* ========================================================== */
+  /* KUNCI SUPAYA DI TENGAH HALAMAN & UKURANNYA PAS             */
+  /* ========================================================== */
+  width: max-content; /* Lebar kapsul akan memeluk pas seluruh teks kontak */
+  margin: 30px auto; /* Kunci membuat box kapsul berada pas di tengah-tengah web */
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  margin-top: 10px; /* Jarak ke atas dengan konten gambar */
+  margin-left: auto; /* Kunci posisi tengah kanan */
+  margin-right: auto; /* Kunci posisi tengah kiri */
+  margin-bottom: 150px; /* KUNCI UTAMA: Memberikan space kosong di bawah agar tidak tertutup tombol fixed */
+}
+.contact-sidebar-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* KUNCI: Membuat ikon dan teks span sejajar lurus vertikal */
+  justify-content: center; /* KUNCI: Membuat isi di dalam link selalu berada di tengah */
+  gap: 10px; /* Spasi horizontal antara ikon dengan teks span */
+  text-decoration: none;
+  white-space: nowrap;
+}
+.contact-sidebar-item .contact-text {
+  color: rgb(99, 132, 100); /* Warna hijau muda terang agar terbaca jelas */
+  font-family: "Cinzel", sans-serif; /* Font elegan mengikuti tombol bawah */
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.contact-sidebar-item svg {
+  width: 22px;
+  height: 22px;
+  stroke: rgb(99, 132, 100); /* Warna garis ikon disamakan dengan teks */
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0; /* Mencegah ikon menyusut/gepeng */
+}
+.contact-sidebar-item:hover .contact-text,
+.contact-sidebar-item:hover svg {
+  color: #ffffff;
+  stroke: #ffffff; /* Berubah menjadi putih menyala saat di-hover */
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 1366px) {
+  html {
+    font-size: 75%;
+  }
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+@media (max-width: 450px) {
+  html {
+    font-size: 55%;
+  }
+}
