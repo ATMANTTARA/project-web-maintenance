@@ -285,27 +285,24 @@ body {
 /* ========================================================== */
 /* KODE PEMULIHAN HP: ANTI MENYUSUT & ANTI RUANG KOSONG KANAN */
 /* ========================================================== */
+/* ========================================================== */
+/* KODE RESPONSIVE HP: ANTI TERPOTONG & FIT 100% LAYAR FLUID   */
+/* ========================================================== */
 @media (max-width: 768px) {
-  /* 1. Kembalikan font-size dasar HP ke ukuran normal agar tidak menyusut */
-  html {
-    font-size: 62.5% !important;
-  }
-
-  /* 2. Paksa body dan html mengambil lebar penuh kaca HP */
   html,
   body {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: hidden !important; /* Memotong ruang kosong hijau di kanan */
+    overflow-x: hidden !important; /* Memotong sisa tumpahan ruang kosong */
   }
 
-  /* 3. Maksimalkan seluruh section agar melebar penuh 100% */
+  /* 1. Mengatur Jarak Aman Kontainer Utama HP */
   section,
   .hero,
   .about {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 40px 20px !important; /* Beri jarak remas aman kiri-kanan */
+    padding: 30px 15px !important; /* Jarak aman 15px agar konten tidak menyentuh casing HP */
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
@@ -313,43 +310,49 @@ body {
     text-align: center !important;
   }
 
-  /* 4. GAMBAR UTAMA (TABEL VISI MISI): Paksa melebar 100% memenuhi layar HP */
+  /* 2. Mengatur Baris Judul & Teks agar Fleksibel */
   .about .row {
     width: 100% !important;
     display: flex !important;
     justify-content: center !important;
     margin: 0 auto !important;
+    padding: 0 !important;
   }
 
+  /* 3. GAMBAR TABEL (LET'S BUILD A PARTNERSHIP): Amankan agar otomatis mengecil pas layar */
   .about img,
   .about-main-img {
-    width: 100% !important; /* Gambar otomatis membesar pas dengan lebar HP */
+    width: 100% !important; /* Memaksa lebar gambar mengikuti 100% area HP */
     max-width: 100% !important;
-    height: auto !important;
-    margin-top: 10px !important;
-    margin-bottom: 30px !important;
+    height: auto !important; /* Aspek rasio tetap dijaga agar tidak gepeng */
     object-fit: contain !important;
+    margin-top: 10px !important;
+    margin-bottom: 25px !important;
   }
 
-  /* 5. KAPSUL KONTAK: Di HP wajib berbaris ke bawah (vertikal) agar tidak tumpah ke kanan */
+  /* 4. KAPSUL KONTAK: Ubah dari baris horizontal menjadi susunan vertikal ke bawah */
   .about .kontek {
     display: flex !important;
-    flex-direction: column !important; /* Susun vertikal bertumpuk ke bawah */
+    flex-direction: column !important; /* Menyusun akun kontak berbaris ke bawah */
     justify-content: center !important;
-    align-items: flex-start !important; /* Rata kiri di dalam kapsul agar rapi */
+    align-items: flex-start !important; /* Membuat teks rata kiri di dalam kapsul agar rapi */
     gap: 15px !important;
 
     background-color: #162c56 !important;
     padding: 20px 25px !important;
     border-radius: 2rem !important;
 
-    width: 100% !important; /* Mengikuti lebar layar HP */
+    /* KUNCI ANTI POTONG: Paksa mengikuti lebar layar HP dengan padding aman */
+    width: 100% !important;
     max-width: 100% !important;
-    margin: 30px auto 160px !important; /* Jarak bawah agar tidak menabrak tombol */
+    box-sizing: border-box !important;
+
+    margin: 30px auto 160px !important; /* Jarak bawah 160px agar tidak tertutup tombol fixed */
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3) !important;
+    transform: none !important; /* Menghilangkan sisa penataan desktop */
   }
 
-  /* Penataan teks kontak di dalam list HP */
+  /* Penataan Item di Dalam Kapsul HP */
   .contact-sidebar-item {
     display: flex !important;
     flex-direction: row !important;
@@ -357,23 +360,24 @@ body {
     justify-content: flex-start !important;
     gap: 12px !important;
     width: 100% !important;
+    white-space: normal !important; /* Mengizinkan teks melipat ke bawah jika layar HP terlalu ramping */
   }
 
   .contact-sidebar-item .contact-text {
-    font-size: 1.3rem !important; /* Ukuran tulisan yang nyaman dibaca di HP */
-    white-space: normal !important; /* Izinkan email panjang turun baris jika mentok */
-    word-break: break-all !important; /* Potong paksa text jika kepanjangan */
-    text-align: left !important;
+    font-size: 1.2rem !important; /* Ukuran teks ideal untuk genggaman layar HP */
     color: rgb(99, 132, 100) !important;
+    text-align: left !important;
+    white-space: normal !important;
+    word-break: break-all !important; /* Potong paksa jika alamat email menabrak dinding kanan */
   }
 
   .contact-sidebar-item svg {
     width: 18px !important;
     height: 18px !important;
-    flex-shrink: 0 !important;
+    flex-shrink: 0 !important; /* Mencegah icon menjadi gepeng akibat desakan teks */
   }
 
-  /* 6. TOMBOL FLOATING CONTACT US DI HP */
+  /* 5. Kalibrasi Ukuran Tombol Melayang Contact Us di HP */
   .floating-cta-button {
     width: 85% !important;
     max-width: 320px !important;
