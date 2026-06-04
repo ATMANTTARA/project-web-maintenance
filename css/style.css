@@ -1,10 +1,13 @@
+/* ========================================================== */
+/* 1. ATURAN UTAMA & DESKTOP LAPTOP (Sifat Dasar Asli)        */
+/* ========================================================== */
 :root {
   --primary: #12603b;
   --bg: #476a5f;
 }
 
 * {
-  font-family: sans-serif;
+  font-family: "Cinzel", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -16,24 +19,21 @@
 html {
   font-size: 62.5%; /* 1rem = 10px */
   scroll-behavior: smooth;
-  height: 100%; /* Kembalikan ke tinggi layar normal */
+  height: 100%;
 }
 
 body {
-  font-family: sans-serif;
+  font-family: "Cinzel", sans-serif;
   background-color: rgb(99, 132, 100);
   color: rgb(99, 132, 100);
   font-size: 1.4rem;
-
-  /* HAPUS SEMUA GANGGUAN OVERFLOW / CONTAIN YANG KAKU */
   width: 100%;
   max-width: 100%;
   position: relative;
-
-  /* Izinkan scroll vertikal bekerja secara murni pada jendela browser */
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }
+
 .hero {
   min-height: 100vh;
   display: flex;
@@ -44,6 +44,7 @@ body {
   background-position: center;
   position: relative;
 }
+
 .hero::after {
   content: "";
   display: block;
@@ -53,12 +54,24 @@ body {
   background: linear-gradient(
     180deg,
     transparent 65%,
-    /* Atas sampai tengah (20%): Bening polos */ rgba(99, 132, 100, 0.5) 75%,
-    /* Tengah ke bawah (60%): Hijau mulai tipis */ rgba(99, 132, 100, 1) 100%
-      /* Paling bawah (100%): Hijau pekat solid */
+    rgba(99, 132, 100, 0.5) 75%,
+    rgba(99, 132, 100, 1) 100%
   );
 }
 
+.hero .webmain {
+  text-align: center; /* Mastikeun tulisan pas aya di tengah (horizontal) */
+  display: block; /* Supados sipatna janten blok anu tiasa diatur marginna */
+  margin: 25px auto 160px auto; /* Jarakna: 25px ti luhur (jarak ti logo), auto kenca-katuhu meh di tengah */
+
+  /* Sésana ieu gaya font anu tadi, mangga tiasa disaluyukeun */
+  font-family: "Cinzel", sans-serif;
+  font-size: 50px; /* Ukuran ageungna huruf */
+  font-weight: 700; /* Kandelna huruf */
+  color: #1a426a; /* Warna biru poék luyu sareng logo */
+  letter-spacing: 6px; /* Spasi antar huruf supados aya jarakna */
+  text-transform: uppercase; /* Mastikeun hurufna kapital sadayana */
+}
 .hero .content {
   display: inline-flex;
   justify-content: center;
@@ -66,76 +79,53 @@ body {
   z-index: 9999;
 }
 
-/* ========================================================== */
-/* KODE UNTUK MEMUNCULKAN TOMBOL MELAYANG KE PERMUKAAN LAYAR   */
-/* ========================================================== */
+/* TOMBOL MELAYANG FIXED */
 .floating-cta-button {
-  /* KUNCI UTAMA POSISI MELAYANG MUTLAK */
   position: fixed !important;
-  bottom: 25px !important; /* Jarak 25px dari batas bawah layar kaca browser */
-  left: 50% !important; /* Dorong poros kiri ke tengah layar */
-  transform: translateX(
-    -50%
-  ) !important; /* Tarik balik agar simetris pas di tengah-tengah */
-
-  /* FORCE SURFACE: Memaksa tombol naik ke lapisan paling depan menembus background */
+  bottom: 25px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   z-index: 9999999 !important;
-  display: flex !important; /* Mengaktifkan flex agar teks & icon sejajar */
+  display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   gap: 10px !important;
-
-  /* Desain Tampilan Tombol */
   background-color: #162c56 !important;
   color: rgb(99, 132, 100) !important;
   font-family: "Cinzel", sans-serif !important;
   font-weight: 600 !important;
   border-radius: 5rem !important;
   box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5) !important;
-  text-decoration: none !important;
-  border: none !important;
-
-  /* Ukuran Responsif Aman (Laptop & HP) */
   width: 85% !important;
   max-width: 320px !important;
   padding: 12px 24px !important;
   font-size: 1.1rem !important;
-
   transition:
     transform 0.2s ease,
     background-color 0.2s ease,
     color 0.2s ease !important;
 }
 
-/* ========================================================== */
-/* EFEK HOVER SAKTI UNTUK TOMBOL UTAMA (MENEMBUS INLINE STYLE)*/
-/* ========================================================== */
 .floating-cta-button:hover {
-  /* 1. Mengubah background menjadi biru yang sedikit lebih terang/kontras */
   background-color: #224382 !important;
-
-  /* 2. Memaksa warna teks & ikon berubah menjadi PUTIH BERSIH menyala */
   color: #ffffff !important;
-
-  /* 3. Efek Animasi Dinamis: Tombol sedikit membesar (scale 1.05) & tetap di tengah */
   transform: translateX(-50%) scale(1.05) !important;
-
-  /* 4. Membuat bayangan (shadow) di bawah tombol menjadi lebih tebal (efek terangkat) */
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5) !important;
-
-  /* 5. Memastikan kursor mouse berubah menjadi logo tangan menunjuk */
   cursor: pointer !important;
 }
 
-/* Memaksa elemen icon/teks di dalamnya ikut berubah jadi putih saat di-hover */
 .floating-cta-button:hover * {
   color: #ffffff !important;
   stroke: #ffffff !important;
 }
+
+/* SECTION ABOUT LAPTOP */
 .about {
-  padding: 5rem 7% 1.4rem;
-  height: fit-content !important;
-  min-height: 15px !important;
+  width: 100% !important;
+  height: auto !important;
+  padding: 5rem 7% 40px !important; /* Mangkas spasi héjo kalebihan di laptop */
+  box-sizing: border-box !important;
+  position: relative !important;
 }
 
 .about h2 {
@@ -156,10 +146,7 @@ body {
   align-items: center;
   background-size: 2rem;
   background-color: rgb(99, 132, 100);
-  top: 0;
-  left: 0;
-  right: 0;
-  padding-left: 20px; /* Memberikan sedikit jarak dari dinding pojok kiri screen */
+  padding-left: 20px;
   gap: 30px;
   color: #162c56;
   margin-top: -20px;
@@ -168,187 +155,109 @@ body {
 .about img,
 .about-main-img {
   display: block !important;
-  margin: 0 auto !important; /* Menjaga posisi gambar tetap presisi di tengah halaman */
-
-  /* ========================================================== */
-  /* KUNCI UKURAN IDEAL (SESUAI GAMBAR CONTOH)                  */
-  /* ========================================================== */
-  width: 200% !important; /* Skala persentase terbaik agar proporsional di monitor laptop */
-  max-width: 900px !important; /* Batas lebar maksimal agar tidak melar di PC layar lebar */
-  height: auto !important; /* Menjaga aspek rasio gambar agar tidak gepeng */
-
-  /* ========================================================== */
-  /* PENGATURAN JARAK (MARGIN RATIO)                            */
-  /* ========================================================== */
-  margin-top: -40px !important; /* Menarik gambar ke atas agar pas di bawah teks "ABOUT US" */
-  transition: all 0.3s ease;
-  margin-top: 10px !important; /* Menarik gambar mepet ke border atas */
-
-  margin-bottom: -90px !important; /* KUNCI: Nilai minus (-) ini akan menarik teks "Contact Us Today:" 
-                              di bawahnya agar naik ke atas dan membuang spasi kosong hijau */
-
+  margin: 10px auto -90px !important;
+  width: 200% !important;
+  max-width: 900px !important;
+  height: auto !important;
   transition: all 0.3s ease;
 }
+
+/* KAPSUL KONTAK DESKTOP LAPTOP (NGAJAJAR KA GIGIR) */
 .about .kontek {
-  display: flex;
-  flex-direction: row; /* Menyusun item bersandingan ke samping */
-  justify-content: center; /* Mengumpulkan item di tengah-tengah kapsul */
-  align-items: center; /* Rata tengah secara vertikal (atas-bawah) */
-  gap: 30px; /* Jarak spasi horizontal antar akun kontak */
-
-  background-color: #162c56; /* Warna biru gelap sesuai tema kamu */
-  padding: 15px 35px; /* Ruang napas di dalam kapsul (atas-bawah 15px, kiri-kanan 35px) */
-  border-radius: 5rem; /* Membuat bentuk oval kapsul yang sempurna */
-
-  /* ========================================================== */
-  /* KUNCI SUPAYA DI TENGAH HALAMAN & UKURANNYA PAS             */
-  /* ========================================================== */
-  width: max-content; /* Lebar kapsul akan memeluk pas seluruh teks kontak */
-  margin: 30px auto; /* Kunci membuat box kapsul berada pas di tengah-tengah web */
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-  margin-top: 90px; /* Jarak ke atas dengan konten gambar */
-  margin-left: auto; /* Kunci posisi tengah kanan */
-  margin-right: auto; /* Kunci posisi tengah kiri */
-  margin-bottom: 75px !important; /* KUNCI UTAMA: Memberikan space kosong di bawah agar tidak tertutup tombol fixed */
-  transform: translateX(
-    0%
-  ); /* KUNCI 2: Menarik kembali box agar presisi pas di tengah-tengah layar */
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px !important;
+  background-color: #162c56 !important;
+  padding: 15px 50px !important; /* Ruang aman ikon laptop */
+  border-radius: 5rem !important;
+  width: max-content !important;
+  max-width: 95% !important;
+  margin: 90px auto 40px !important; /* Jarak pas di laptop ameh teu melar héjo */
+  box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.3) !important;
 }
+
 .contact-sidebar-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center; /* KUNCI: Membuat ikon dan teks span sejajar lurus vertikal */
-  gap: 10px; /* Spasi horizontal antara ikon dengan teks span */
-  text-decoration: none;
-  white-space: nowrap;
-  width: 100% !important;
-  justify-content: flex-start !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
 }
-.contact-sidebar-item .contact-text {
-  color: rgb(99, 132, 100); /* Warna hijau muda terang agar terbaca jelas */
-  font-family: "Cinzel", sans-serif; /* Font elegan mengikuti tombol bawah */
-  font-weight: 600;
-  font-size: 0.9rem !important;
 
-  /* ========================================================== */
-  /* FORCE WRAP: Matikan nowrap agar teks email otomatis turun  */
-  /* ========================================================== */
-  word-break: break-all !important; /* Memotong teks email tepat di batas ujung layar HP */
-  text-align: left !important;
-  font-size: 0.85rem; /* Ukuran ideal untuk teks berjejer di dalam kapsul */
-  white-space: nowrap;
+.contact-sidebar-item .contact-text {
+  color: rgb(99, 132, 100) !important;
+  font-family: "Cinzel", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 0.85rem !important;
 }
+
 .contact-sidebar-item svg {
   width: 20px;
   height: 20px;
-  stroke: rgb(99, 132, 100); /* Warna garis ikon disamakan dengan teks */
+  stroke: rgb(99, 132, 100);
   stroke-width: 2;
   fill: none;
-  flex-shrink: 0; /* Mencegah ikon menyusut/gepeng */
+  flex-shrink: 0;
 }
+
 .contact-sidebar-item:hover .contact-text,
 .contact-sidebar-item:hover svg {
   color: #ffffff;
-  stroke: #ffffff; /* Berubah menjadi putih menyala saat di-hover */
+  stroke: #ffffff;
   transition: all 0.2s ease;
 }
 
 /* ========================================================== */
-/* LAYOUT UNTUK LAPTOP KECIL / TABLET (MAX-WIDTH: 1024px)     */
-/* ========================================================== */
-@media (max-width: 1024px) {
-  .kontak-kapsul-container {
-    display: flex !important;
-    flex-direction: row !important; /* Biarkan tetap menyamping, jangan dipaksa ke bawah dulu */
-    justify-content: space-evenly !important; /* Membagi ruang antar-kontak secara adil */
-    align-items: center !important;
-
-    /* Lebarkan kontainernya agar teks email tidak tercekik */
-    width: 95% !important;
-    max-width: 100% !important;
-    padding: 15px 20px !important;
-    gap: 15px !important;
-
-    margin: 30px auto 150px !important; /* Tetap berada di tengah halaman */
-  }
-
-  .contact-sidebar-item .contact-text {
-    /* Perkecil ukuran font sedikit lagi agar muat dalam satu baris */
-    font-size: 0.85rem !important;
-    white-space: nowrap !important; /* Paksa teks email tetap lurus satu baris */
-  }
-}
-
-/* ========================================================== */
-/* FORMULA MEDIA QUERY: ANTI TERPOTONG & OTOMATIS DI TENGAH   */
+/* 2. LAYOUT UNTUK LAPTOP KECIL / TABLET (MAX-WIDTH: 1024px)  */
 /* ========================================================== */
 @media (max-width: 768px) {
-  /* 1. MENGUNCI BADAN HALAMAN (Pencegah Tumpah ke Kanan) */
-  html,
-  body {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: hidden !important; /* Memotong paksa jika ada elemen mbandel yang jorok ke kanan */
-    box-sizing: border-box !important;
+  /* ... kodingan mobile nu sanesna biarkan tetep aya ... */
+  .hero .webmain {
+    font-size: 20px; /* Ukuran hurufna dialitan sakedik supados proporsional di HP */
+    letter-spacing: 3px; /* Spasi hurufna diradakeun supados teu pasedek */
+    margin: 190px auto 250px auto; /* Margin minusna dikirangan supados teu teuing nyuruntul ka luhur di HP */
+    padding: 0 15px; /* Supados aya jarak aman di kénca katuhu layar HP */
   }
-
-  /* 2. PEMBUNGKUS UTAMA (Mengunci Semua Konten di As Tengah Layar) */
-  section,
-  .container,
-  .about,
-  .hero {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 40px 20px !important; /* Bantal pengaman 20px agar konten tidak nempel casing HP */
-    box-sizing: border-box !important;
-
-    /* Kunci Segitiga Flexbox untuk Rata Tengah Mutlak */
+  /* KALIBRASI RESPONSIVE KHUSUS HP AGAR LOLOS TINA TOMBOL MELAYANG */
+  .about .kontek {
     display: flex !important;
-    flex-direction: column !important; /* Paksa elemen berbaris bertumpuk ke bawah */
-    justify-content: center !important; /* Rata tengah vertikal */
-    align-items: center !important; /* Rata tengah horizontal */
-    text-align: center !important; /* Memaksa semua text (h2, p, span) lurus di tengah */
-  }
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+    padding: 25px 30px !important;
+    border-radius: 2rem !important;
+    width: max-content !important;
+    max-width: 90% !important;
+    box-sizing: border-box !important;
 
-  /* 3. SETINGAN GAMBAR FLUID (Anti Terpotong & Mengikuti Lebar HP) */
-  .about .row,
-  .image-wrapper {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
+    /* REVISI UTAMA KANGGO HP: */
+    margin-top: 10px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 
+    /* KUNCI: Jarak handap digedéan janten 120px ameh kapsulna bisa lolos ka luhur, 
+       teu katindihan ku tombol fixed CONTACT USS!! */
+    margin-bottom: 50px !important;
+
+    background-color: #162c56 !important;
+    transform: none !important;
+  }
   .about img,
-  .about-main-img,
-  img {
-    width: 100% !important; /* Gambar akan melebar maksimal mengikuti lebar layar HP */
-    max-width: 100% !important; /* Menahan gambar agar tidak meluber keluar layar */
-    height: auto !important; /* KUNCI: Menjaga rasio gambar agar tidak gepeng/peyang */
-    object-fit: contain !important; /* Memastikan seluruh badan gambar masuk ke dalam frame HP */
-    margin: 15px auto !important; /* Otomatis mengunci posisi gambar pas di tengah */
-  }
+  .about-main-img {
+    display: block !important;
 
-  /* 4. SETINGAN FONT & TEXT RESPONSIVE (Anti Nabrak & Melipat Rapi) */
-  h1,
-  h2,
-  h3,
-  p,
-  span,
-  a {
-    max-width: 100% !important;
-    word-wrap: break-word !important; /* Izinkan kata melipat ke bawah jika terlalu panjang */
-    word-break: break-all !important; /* Memotong paksa link/email panjang agar tidak jebol ke kanan */
-  }
-
-  h2 {
-    font-size: 2.2rem !important; /* Jinakkan ukuran judul yang tadinya raksasa di laptop */
+    /* Paksa lebar gambarna ngaleutikan numutkeun lebar layar HP */
     width: 100% !important;
-    text-align: center !important;
-  }
+    max-width: 100% !important;
+    height: auto !important;
 
-  p {
-    font-size: 1.3rem !important; /* Ukuran teks paragraf yang nyaman dibaca di layar HP */
-    line-height: 1.6 !important; /* Memberi jarak napas antar baris kalimat agar tidak berhimpitan */
+    /* Nolkeun margin minus laptop ameh gambarna teu kaluar tina layar HP */
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
