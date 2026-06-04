@@ -280,109 +280,75 @@ body {
 }
 
 /* ========================================================== */
-/* LAYOUT KHUSUS UNTUK HP / MOBILE (MAX-WIDTH: 768px)         */
-/* ========================================================== */
-/* ========================================================== */
-/* KODE PEMULIHAN HP: ANTI MENYUSUT & ANTI RUANG KOSONG KANAN */
-/* ========================================================== */
-/* ========================================================== */
-/* KODE RESPONSIVE HP: ANTI TERPOTONG & FIT 100% LAYAR FLUID   */
+/* FORMULA MEDIA QUERY: ANTI TERPOTONG & OTOMATIS DI TENGAH   */
 /* ========================================================== */
 @media (max-width: 768px) {
+  /* 1. MENGUNCI BADAN HALAMAN (Pencegah Tumpah ke Kanan) */
   html,
   body {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: hidden !important; /* Memotong sisa tumpahan ruang kosong */
+    overflow-x: hidden !important; /* Memotong paksa jika ada elemen mbandel yang jorok ke kanan */
+    box-sizing: border-box !important;
   }
 
-  /* 1. Mengatur Jarak Aman Kontainer Utama HP */
+  /* 2. PEMBUNGKUS UTAMA (Mengunci Semua Konten di As Tengah Layar) */
   section,
-  .hero,
-  .about {
+  .container,
+  .about,
+  .hero {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 30px 15px !important; /* Jarak aman 15px agar konten tidak menyentuh casing HP */
+    padding: 40px 20px !important; /* Bantal pengaman 20px agar konten tidak nempel casing HP */
     box-sizing: border-box !important;
+
+    /* Kunci Segitiga Flexbox untuk Rata Tengah Mutlak */
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column !important; /* Paksa elemen berbaris bertumpuk ke bawah */
+    justify-content: center !important; /* Rata tengah vertikal */
+    align-items: center !important; /* Rata tengah horizontal */
+    text-align: center !important; /* Memaksa semua text (h2, p, span) lurus di tengah */
+  }
+
+  /* 3. SETINGAN GAMBAR FLUID (Anti Terpotong & Mengikuti Lebar HP) */
+  .about .row,
+  .image-wrapper {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
     align-items: center !important;
+  }
+
+  .about img,
+  .about-main-img,
+  img {
+    width: 100% !important; /* Gambar akan melebar maksimal mengikuti lebar layar HP */
+    max-width: 100% !important; /* Menahan gambar agar tidak meluber keluar layar */
+    height: auto !important; /* KUNCI: Menjaga rasio gambar agar tidak gepeng/peyang */
+    object-fit: contain !important; /* Memastikan seluruh badan gambar masuk ke dalam frame HP */
+    margin: 15px auto !important; /* Otomatis mengunci posisi gambar pas di tengah */
+  }
+
+  /* 4. SETINGAN FONT & TEXT RESPONSIVE (Anti Nabrak & Melipat Rapi) */
+  h1,
+  h2,
+  h3,
+  p,
+  span,
+  a {
+    max-width: 100% !important;
+    word-wrap: break-word !important; /* Izinkan kata melipat ke bawah jika terlalu panjang */
+    word-break: break-all !important; /* Memotong paksa link/email panjang agar tidak jebol ke kanan */
+  }
+
+  h2 {
+    font-size: 2.2rem !important; /* Jinakkan ukuran judul yang tadinya raksasa di laptop */
+    width: 100% !important;
     text-align: center !important;
   }
 
-  /* 2. Mengatur Baris Judul & Teks agar Fleksibel */
-  .about .row {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
-  }
-
-  /* 3. GAMBAR TABEL (LET'S BUILD A PARTNERSHIP): Amankan agar otomatis mengecil pas layar */
-  .about img,
-  .about-main-img {
-    width: 100% !important; /* Memaksa lebar gambar mengikuti 100% area HP */
-    max-width: 100% !important;
-    height: auto !important; /* Aspek rasio tetap dijaga agar tidak gepeng */
-    object-fit: contain !important;
-    margin-top: 10px !important;
-    margin-bottom: 25px !important;
-  }
-
-  /* 4. KAPSUL KONTAK: Ubah dari baris horizontal menjadi susunan vertikal ke bawah */
-  .about .kontek {
-    display: flex !important;
-    flex-direction: column !important; /* Menyusun akun kontak berbaris ke bawah */
-    justify-content: center !important;
-    align-items: flex-start !important; /* Membuat teks rata kiri di dalam kapsul agar rapi */
-    gap: 15px !important;
-
-    background-color: #162c56 !important;
-    padding: 20px 25px !important;
-    border-radius: 2rem !important;
-
-    /* KUNCI ANTI POTONG: Paksa mengikuti lebar layar HP dengan padding aman */
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-
-    margin: 30px auto 160px !important; /* Jarak bawah 160px agar tidak tertutup tombol fixed */
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3) !important;
-    transform: none !important; /* Menghilangkan sisa penataan desktop */
-  }
-
-  /* Penataan Item di Dalam Kapsul HP */
-  .contact-sidebar-item {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 12px !important;
-    width: 100% !important;
-    white-space: normal !important; /* Mengizinkan teks melipat ke bawah jika layar HP terlalu ramping */
-  }
-
-  .contact-sidebar-item .contact-text {
-    font-size: 1.2rem !important; /* Ukuran teks ideal untuk genggaman layar HP */
-    color: rgb(99, 132, 100) !important;
-    text-align: left !important;
-    white-space: normal !important;
-    word-break: break-all !important; /* Potong paksa jika alamat email menabrak dinding kanan */
-  }
-
-  .contact-sidebar-item svg {
-    width: 18px !important;
-    height: 18px !important;
-    flex-shrink: 0 !important; /* Mencegah icon menjadi gepeng akibat desakan teks */
-  }
-
-  /* 5. Kalibrasi Ukuran Tombol Melayang Contact Us di HP */
-  .floating-cta-button {
-    width: 85% !important;
-    max-width: 320px !important;
-    bottom: 20px !important;
-    padding: 12px 24px !important;
-    font-size: 1.2rem !important;
+  p {
+    font-size: 1.3rem !important; /* Ukuran teks paragraf yang nyaman dibaca di layar HP */
+    line-height: 1.6 !important; /* Memberi jarak napas antar baris kalimat agar tidak berhimpitan */
   }
 }
