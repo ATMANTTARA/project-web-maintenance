@@ -17,7 +17,7 @@ body {
   font-family: sans-serif;
   background-color: rgb(99, 132, 100);
   color: rgb(99, 132, 100);
-  min-height: 1700px;
+  min-height: 2000px;
 }
 
 .hero {
@@ -148,6 +148,9 @@ body {
   margin-left: auto; /* Kunci posisi tengah kanan */
   margin-right: auto; /* Kunci posisi tengah kiri */
   margin-bottom: 150px; /* KUNCI UTAMA: Memberikan space kosong di bawah agar tidak tertutup tombol fixed */
+  transform: translateX(
+    0%
+  ); /* KUNCI 2: Menarik kembali box agar presisi pas di tengah-tengah layar */
 }
 .contact-sidebar-item {
   display: flex;
