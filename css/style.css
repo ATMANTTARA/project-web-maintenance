@@ -19,6 +19,11 @@ body {
   color: rgb(99, 132, 100);
   min-height: 2000px;
 }
+html,
+body {
+  overflow-x: hidden; /* KUNCI MUTLAK: Memotong semua elemen yang mencoba jebol ke kanan layar */
+  max-width: 100%;
+}
 
 .hero {
   min-height: 100vh;
@@ -57,8 +62,6 @@ body {
   align-items: center;
   margin: 20px 0;
   gap: 10px;
-  padding: 1rem 2rem;
-  font-size: 1.4rem;
   font-family: "Cinzel", sans-serif;
   font-weight: 600;
   font-size: 2rem;
@@ -67,13 +70,15 @@ body {
   border-radius: 5rem;
   box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
   position: fixed; /* KUNCI 1: Membuat tombol mengambang bebas dari scroll halaman */
-  bottom: 40px; /* Mengatur jarak tombol dari ujung bawah layar */
+  bottom: 40px !important; /* Mengatur jarak tombol dari ujung bawah layar */
   left: 50%; /* Geser pembungkus ke tengah horizontal (poros kiri di tengah) */
   transform: translateX(
     -50%
   ); /* KUNCI 2: Menarik kembali box agar presisi pas di tengah-tengah layar */
-
-  width: auto; /* Memastikan lebar pembungkus mengikuti tombol */
+  max-width: 340px !important; /* Jangan biarkan terlalu lebar di HP */
+  font-size: 1.2rem !important; /* Perkecil sedikit ukuran font-nya */
+  padding: 1rem 1.5rem !important;
+  width: 85% !important; /* Memastikan lebar pembungkus mengikuti tombol */
   z-index: 9999; /* KUNCI 3: Angka tinggi agar tombol selalu berada di lapisan paling atas menindih elemen lain */
 }
 .hero .content:hover .cta,
@@ -156,16 +161,25 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center; /* KUNCI: Membuat ikon dan teks span sejajar lurus vertikal */
-  justify-content: center; /* KUNCI: Membuat isi di dalam link selalu berada di tengah */
   gap: 10px; /* Spasi horizontal antara ikon dengan teks span */
   text-decoration: none;
   white-space: nowrap;
+  width: 100% !important;
+  justify-content: flex-start !important;
 }
 .contact-sidebar-item .contact-text {
   color: rgb(99, 132, 100); /* Warna hijau muda terang agar terbaca jelas */
   font-family: "Cinzel", sans-serif; /* Font elegan mengikuti tombol bawah */
   font-weight: 600;
   font-size: 1.2rem;
+  font-size: 0.9rem !important;
+
+  /* ========================================================== */
+  /* FORCE WRAP: Matikan nowrap agar teks email otomatis turun  */
+  /* ========================================================== */
+  white-space: normal !important; /* MEMBOLEHKAN teks turun ke bawah jika layar terlalu sempit */
+  word-break: break-all !important; /* Memotong teks email tepat di batas ujung layar HP */
+  text-align: left !important;
 }
 .contact-sidebar-item svg {
   width: 22px;
@@ -188,12 +202,61 @@ body {
   }
 }
 @media (max-width: 768px) {
-  html {
-    font-size: 62.5%;
+  .kontak-kapsul-container {
+    /* 1. KEMBALIKAN POSISI: Mengubah dari fixed/sticky menjadi posisi normal di HP */
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+
+    /* 2. ATUR UKURAN LAYAR HP: Memaksa bentuk kotak vertikal ke bawah */
+    display: flex !important;
+    flex-direction: column !important;
+    width: 90% !important; /* Lebar kotak mengambil 90% lebar layar HP */
+    max-width: 100% !important;
+
+    /* 3. RAPIDKAN SISI VISUAL */
+    padding: 20px 15px !important;
+    border-radius: 2rem !important; /* Kelengkungan sudut dikecilkan agar proporsional di HP */
+    gap: 15px !important; /* Jarak vertikal antar baris kontak */
+
+    /* 4. ATUR MARGIN AMAN */
+    margin: 40px auto 160px !important; /* Bawah diberi 160px agar tidak tertumpuk tombol CONTACT US fixed */
+  }
+
+  /* Mengatur item kontak di dalam HP agar rata kiri */
+  .contact-sidebar-item {
+    width: 100% !important;
+    justify-content: flex-start !important; /* Ikon dan teks mepet ke kiri */
+    padding-left: 5px !important;
+  }
+
+  /* Mengecilkan sedikit ukuran font agar muat di layar HP yang sempit */
+  .contact-sidebar-item .contact-text {
+    font-size: 0.95rem !important; /* Font diturunkan sedikit agar tidak melar */
+    white-space: normal !important; /* Mengizinkan teks email yang panjang untuk bungkus otomatis jika terlalu sempit */
+    word-break: break-all;
+  }
+
+  .contact-sidebar-item svg {
+    width: 18px !important; /* Perkecil sedikit ukuran ikon feather di HP */
+    height: 18px !important;
   }
 }
-@media (max-width: 450px) {
-  html {
-    font-size: 55%;
+/* Jika layar browser berukuran 1024px atau lebih kecil (Layar Laptop kecil/Tablet) */
+@media (max-width: 1024px) {
+  .kontak-kapsul-container {
+    flex-direction: column; /* Ubah dari menyamping menjadi tumpuk ke bawah */
+    border-radius: 2rem; /* Sesuaikan kelengkungan sudutnya */
+    width: 85%;
+    gap: 15px;
+    padding: 20px;
+    margin-bottom: 160px; /* Beri space lebih tinggi karena kotak memanjang ke bawah */
+  }
+
+  .contact-sidebar-item {
+    width: 100%;
+    justify-content: flex-start; /* Rata kiri agar rapi saat berbaris ke bawah */
+    padding-left: 10%; /* Dorong sedikit ke tengah */
   }
 }
