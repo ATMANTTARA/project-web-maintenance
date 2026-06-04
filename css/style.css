@@ -12,51 +12,28 @@
   border: none;
   text-decoration: none;
 }
-* {
-  box-sizing: border-box; /* Membuat hitungan padding tidak menambah lebar elemen */
-  margin: 0;
-  padding: 0;
-}
-img {
-  max-width: 100%;
-  height: auto;
-}
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden; /* Memotong mati semua elemen yang mencoba jebol ke kanan layar HP */
-  -webkit-text-size-adjust: 100%; /* Mencegah browser HP mengubah ukuran teks secara sepihak */
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  scroll-behavior: smooth;
+  height: 100%; /* Kembalikan ke tinggi layar normal */
 }
 
 body {
   font-family: sans-serif;
   background-color: rgb(99, 132, 100);
   color: rgb(99, 132, 100);
-  min-height: 10px;
-}
-/* MEMOTONG SEMUA RUANG KOSONG DI BAWAH FOOTER/ABOUT */
-html,
-body {
-  max-width: 100%;
-  height: auto !important;
-  contain: paint; /* Memaksa browser hanya me-render area yang ada konten aktifnya saja */
-}
-html,
-body {
-  overflow-x: hidden; /* KUNCI MUTLAK: Memotong semua elemen yang mencoba jebol ke kanan layar */
-  max-width: 100%;
-}
-html {
-  /* Mengubah dasar 1rem yang tadinya 16px menjadi 10px (62.5% dari 16px) */
-  font-size: 62.5%;
-}
-
-body {
-  /* Kembalikan ukuran teks normal ke 14px */
   font-size: 1.4rem;
-}
 
+  /* HAPUS SEMUA GANGGUAN OVERFLOW / CONTAIN YANG KAKU */
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+
+  /* Izinkan scroll vertikal bekerja secara murni pada jendela browser */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
 .hero {
   min-height: 100vh;
   display: flex;
@@ -88,45 +65,73 @@ body {
   align-content: center;
   z-index: 9999;
 }
-.hero .content .cta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-  gap: 10px;
-  font-family: "Cinzel", sans-serif;
-  font-weight: 600;
-  color: rgb(99, 132, 100);
-  background-color: #162c56;
-  border-radius: 5rem;
-  box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
 
-  /* ========================================================== */
-  /* SETINGAN UNTUK MEMBUAT TOMBOL MENGAMBANG FIX DI TENGAH     */
-  /* ========================================================== */
-  position: fixed;
-  bottom: 10px; /* Jarak melayang dari ujung bawah layar */
-  left: 50%; /* Geser poros kiri tombol ke tengah layar */
-
-  /* PERBAIKAN SINTAKS: Wajib ditulis dalam satu baris lurus tanpa enter */
+/* ========================================================== */
+/* KODE UNTUK MEMUNCULKAN TOMBOL MELAYANG KE PERMUKAAN LAYAR   */
+/* ========================================================== */
+.floating-cta-button {
+  /* KUNCI UTAMA POSISI MELAYANG MUTLAK */
+  position: fixed !important;
+  bottom: 25px !important; /* Jarak 25px dari batas bawah layar kaca browser */
+  left: 50% !important; /* Dorong poros kiri ke tengah layar */
   transform: translateX(
     -50%
-  ); /* KUNCI: Menarik kembali box agar pas simetris di tengah */
+  ) !important; /* Tarik balik agar simetris pas di tengah-tengah */
 
-  max-width: 340px;
-  font-size: 1.2rem;
-  padding: 1rem 1.5rem;
-  width: 85%;
-  z-index: 9999; /* Memastikan menindih semua elemen konten di belakangnya */
+  /* FORCE SURFACE: Memaksa tombol naik ke lapisan paling depan menembus background */
+  z-index: 9999999 !important;
+  display: flex !important; /* Mengaktifkan flex agar teks & icon sejajar */
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  /* Desain Tampilan Tombol */
+  background-color: #162c56 !important;
+  color: rgb(99, 132, 100) !important;
+  font-family: "Cinzel", sans-serif !important;
+  font-weight: 600 !important;
+  border-radius: 5rem !important;
+  box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5) !important;
+  text-decoration: none !important;
+  border: none !important;
+
+  /* Ukuran Responsif Aman (Laptop & HP) */
+  width: 85% !important;
+  max-width: 320px !important;
+  padding: 12px 24px !important;
+  font-size: 1.1rem !important;
+
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease !important;
 }
 
-.hero .content:hover .cta,
-.content:hover {
-  color: #ffffff;
-  stroke: #ffffff; /* Berubah menjadi putih menyala saat di-hover */
-  transition: all 0.2s ease;
+/* ========================================================== */
+/* EFEK HOVER SAKTI UNTUK TOMBOL UTAMA (MENEMBUS INLINE STYLE)*/
+/* ========================================================== */
+.floating-cta-button:hover {
+  /* 1. Mengubah background menjadi biru yang sedikit lebih terang/kontras */
+  background-color: #224382 !important;
+
+  /* 2. Memaksa warna teks & ikon berubah menjadi PUTIH BERSIH menyala */
+  color: #ffffff !important;
+
+  /* 3. Efek Animasi Dinamis: Tombol sedikit membesar (scale 1.05) & tetap di tengah */
+  transform: translateX(-50%) scale(1.05) !important;
+
+  /* 4. Membuat bayangan (shadow) di bawah tombol menjadi lebih tebal (efek terangkat) */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5) !important;
+
+  /* 5. Memastikan kursor mouse berubah menjadi logo tangan menunjuk */
+  cursor: pointer !important;
 }
 
+/* Memaksa elemen icon/teks di dalamnya ikut berubah jadi putih saat di-hover */
+.floating-cta-button:hover * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
 .about {
   padding: 5rem 7% 1.4rem;
   height: fit-content !important;
@@ -193,18 +198,18 @@ body {
 
   background-color: #162c56; /* Warna biru gelap sesuai tema kamu */
   padding: 15px 35px; /* Ruang napas di dalam kapsul (atas-bawah 15px, kiri-kanan 35px) */
-  border-radius: 3rem; /* Membuat bentuk oval kapsul yang sempurna */
+  border-radius: 5rem; /* Membuat bentuk oval kapsul yang sempurna */
 
   /* ========================================================== */
   /* KUNCI SUPAYA DI TENGAH HALAMAN & UKURANNYA PAS             */
   /* ========================================================== */
   width: max-content; /* Lebar kapsul akan memeluk pas seluruh teks kontak */
-  margin: 15px auto; /* Kunci membuat box kapsul berada pas di tengah-tengah web */
+  margin: 30px auto; /* Kunci membuat box kapsul berada pas di tengah-tengah web */
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
   margin-top: 90px; /* Jarak ke atas dengan konten gambar */
   margin-left: auto; /* Kunci posisi tengah kanan */
   margin-right: auto; /* Kunci posisi tengah kiri */
-  margin-bottom: 70px; /* KUNCI UTAMA: Memberikan space kosong di bawah agar tidak tertutup tombol fixed */
+  margin-bottom: 75px !important; /* KUNCI UTAMA: Memberikan space kosong di bawah agar tidak tertutup tombol fixed */
   transform: translateX(
     0%
   ); /* KUNCI 2: Menarik kembali box agar presisi pas di tengah-tengah layar */
@@ -297,62 +302,5 @@ body {
   .contact-sidebar-item .contact-text {
     font-size: 0.95rem !important; /* Di HP font bisa diperbesar lagi karena jalurnya sudah vertikal */
     white-space: nowrap !important; /* Jaga tetap lurus ke samping */
-  }
-}
-
-@media (max-width: 768px) {
-  /* 1. SECTIONS: Ubah semua susunan kolom horizontal menjadi vertikal */
-  section,
-  .container,
-  .about-content,
-  .hero {
-    padding: 30px 20px !important; /* Beri jarak remas aman di kiri-kanan layar HP */
-    display: flex !important;
-    flex-direction: column !important; /* Paksa susunan berbaris ke bawah */
-    align-items: center !important;
-    text-align: center !important;
-  }
-
-  /* 2. GAMBAR UTAMA: Kecilkan skala gambar besar (About/Visi Misi) agar pas di HP */
-  .about img,
-  .about-main-img {
-    width: 90% !important; /* Mengambil 90% lebar layar HP */
-    max-width: 100% !important;
-    margin-top: 10px !important; /* Reset margin negatif desktop agar tidak tabrakan */
-    margin-bottom: 20px !important;
-  }
-
-  /* 3. KAPSUL KONTAK: Ubah menjadi kotak memanjang ke bawah */
-  .kontak-kapsul-container {
-    flex-direction: column !important;
-    width: 100% !important; /* Mengikuti lebar section parent */
-    padding: 20px 15px !important;
-    border-radius: 1.5rem !important;
-    gap: 15px !important;
-    margin: 20px auto 120px !important; /* Beri space bawah agar tidak tertutup tombol fixed */
-  }
-
-  /* Item kontak di dalam HP rata kiri sedikit agar lurus rapi */
-  .contact-sidebar-item {
-    width: 100% !important;
-    justify-content: flex-start !important;
-    padding-left: 10% !important;
-  }
-
-  /* Jinakkan teks kontak yang kepanbanyangan di HP */
-  .contact-sidebar-item .contact-text {
-    font-size: 0.9rem !important;
-    white-space: normal !important; /* Izinkan teks email panjang melipat ke bawah jika layar sangat sempit */
-    word-break: break-all !important; /* Potong paksa teks jika mentok batas kanan */
-  }
-
-  /* 4. TOMBOL FLOATING CONTACT US */
-  .contact-us-floating-button {
-    width: 85% !important;
-    max-width: 320px !important;
-    bottom: 15px !important; /* Jarak tipis mengambang di bawah kaca HP */
-    padding: 12px !important;
-    font-size: 1rem !important;
-    z-index: 99999 !important;
   }
 }
